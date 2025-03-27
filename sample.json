@@ -1,57 +1,64 @@
 {
-  "title": "Blog Post",
+  "title": "User Profile",
   "type": "object",
   "properties": {
-    "id": {
+    "username": {
       "type": "string",
-      "format": "uuid"
+      "minLength": 3,
+      "maxLength": 20,
+      "description": "Username (3-20 characters)."
     },
-    "title": {
-      "type": "string"
-    },
-    "author": {
-      "type": "string"
-    },
-    "content": {
-      "type": "string"
-    },
-    "datePublished": {
+    "email": {
       "type": "string",
-      "format": "date-time"
+      "format": "email",
+      "description": "Valid email address."
     },
-    "tags": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      }
-    },
-    "likes": {
+    "age": {
       "type": "integer",
-      "minimum": 0
+      "minimum": 13,
+      "description": "Age (must be 13 or older)."
     },
-    "comments": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "user": {
-            "type": "string"
-          },
-          "comment": {
-            "type": "string"
-          },
-          "datePosted": {
-            "type": "string",
-            "format": "date-time"
-          }
+    "bio": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Short bio (max 500 characters)."
+    },
+    "socialLinks": {
+      "type": "object",
+      "description": "Social media profiles.",
+      "properties": {
+        "twitter": {
+          "type": "string",
+          "format": "uri",
+          "description": "Twitter profile URL."
         },
-        "required": ["id", "user", "comment", "datePosted"]
-      }
+        "linkedin": {
+          "type": "string",
+          "format": "uri",
+          "description": "LinkedIn profile URL."
+        },
+        "github": {
+          "type": "string",
+          "format": "uri",
+          "description": "GitHub profile URL."
+        }
+      },
+      "additionalProperties": false
+    },
+    "skills": {
+      "type": "array",
+      "description": "List of skills.",
+      "items": {
+        "type": "string",
+        "description": "Skill (e.g., JavaScript, React, Python)."
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "description": "Account status."
     }
   },
-  "required": ["id", "title", "author", "content", "datePublished", "tags", "likes", "comments"]
+  "required": ["username", "email", "isActive"]
 }
