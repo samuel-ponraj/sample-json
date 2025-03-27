@@ -1,45 +1,57 @@
 {
-  "title":"sample",
+  "title": "Blog Post",
   "type": "object",
   "properties": {
     "id": {
       "type": "string",
-      "format": "uuid",
-      "description": "Unique identifier for the user"
+      "format": "uuid"
     },
-    "name": {
+    "title": {
+      "type": "string"
+    },
+    "author": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "datePublished": {
       "type": "string",
-      "minLength": 1,
-      "description": "User's full name"
-    },
-    "email": {
-      "type": "string",
-      "format": "email",
-      "description": "User's email address"
-    },
-    "age": {
-      "type": "integer",
-      "minimum": 18,
-      "description": "User's age (must be 18 or above)"
-    },
-    "isAdmin": {
-      "type": "boolean",
-      "description": "Indicates if the user has admin privileges"
-    },
-    "address": {
-      "type": "object",
-      "properties": {
-        "street": { "type": "string" },
-        "city": { "type": "string" },
-        "zipCode": { "type": "string", "pattern": "^[0-9]{5}$" }
-      },
-      "required": ["street", "city"]
+      "format": "date-time"
     },
     "tags": {
       "type": "array",
-      "items": { "type": "string" },
-      "description": "List of tags associated with the user"
+      "items": {
+        "type": "string"
+      }
+    },
+    "likes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "user": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "datePosted": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["id", "user", "comment", "datePosted"]
+      }
     }
   },
-  "required": ["id", "name", "email"]
+  "required": ["id", "title", "author", "content", "datePublished", "tags", "likes", "comments"]
 }
