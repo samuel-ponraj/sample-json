@@ -1,0 +1,45 @@
+{
+  "title":"sample",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the user"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "User's full name"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "User's email address"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 18,
+      "description": "User's age (must be 18 or above)"
+    },
+    "isAdmin": {
+      "type": "boolean",
+      "description": "Indicates if the user has admin privileges"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "zipCode": { "type": "string", "pattern": "^[0-9]{5}$" }
+      },
+      "required": ["street", "city"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of tags associated with the user"
+    }
+  },
+  "required": ["id", "name", "email"]
+}
