@@ -37,7 +37,7 @@
         },
         "state": {
           "type": "string",
-          "enum": ["AL", "AK", "AZ", /* ...other states... */]
+          "enum": ["AL", "AK", "AZ"]
         },
         "zipCode": {
           "type": "string",
