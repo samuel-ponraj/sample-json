@@ -1,5 +1,5 @@
 {
-  "title": "Employees form",
+  "title": "Employees for",
   "type": "object",
   "required": ["name", "email", "age", "department"],
   "properties": {
