@@ -1,65 +1,92 @@
 {
-  "title": "Employee schema",
+  "title": "Person",
+  "description": "A person in our system",
   "type": "object",
-  "required": ["name", "email", "age", "department"],
   "properties": {
-    "name": {
+    "firstName": {
       "type": "string",
-      "description": "Full Name",
-      "minLength": 3
+      "description": "The person's first name.",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "lastName": {
+      "type": "string",
+      "description": "The person's last name.",
+      "minLength": 1,
+      "maxLength": 50
+    },
+    "age": {
+      "description": "Age in years which must be equal to or greater than zero.",
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
     },
     "email": {
       "type": "string",
-      "description": "Email",
-      "format": "email"
-    },
-    "age": {
-      "type": "integer",
-      "description": "Age",
-      "minimum": 18,
-      "maximum": 65
-    },
-    "department": {
-      "type": "string",
-      "description": "Department",
-      "enum": ["HR", "Engineering", "Sales", "Marketing", "Finance"]
-    },
-    "joiningDate": {
-      "type": "string",
-      "description": "Joining Date",
-      "format": "date"
-    },
-    "isPermanent": {
-      "type": "boolean",
-      "description": "Permanent Employee"
+      "format": "email",
+      "description": "The person's email address"
     },
     "address": {
       "type": "object",
-      "description": "Address",
       "properties": {
         "street": {
-          "type": "string",
-          "description": "Street"
+          "type": "string"
         },
         "city": {
+          "type": "string"
+        },
+        "state": {
           "type": "string",
-          "description": "City"
+          "enum": ["AL", "AK", "AZ", /* ...other states... */]
         },
         "zipCode": {
           "type": "string",
-          "description": "ZIP Code",
-          "pattern": "^[0-9]{5}$"
+          "pattern": "^[0-9]{5}(-[0-9]{4})?$"
         }
       },
-      "required": ["street", "city"]
+      "required": ["street", "city", "state", "zipCode"],
+      "additionalProperties": false
     },
-    "skills": {
+    "phoneNumbers": {
       "type": "array",
-      "description": "Skills",
       "items": {
-        "type": "string"
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["home", "work", "mobile"]
+          },
+          "number": {
+            "type": "string",
+            "pattern": "^\\+?[0-9\\-\\s]+$"
+          }
+        },
+        "required": ["type", "number"]
       },
-      "minItems": 1
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": false
+    },
+    "registrationDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "newsletter": {
+          "type": "boolean"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark", "system"]
+        }
+      }
     }
-  }
+  },
+  "required": ["firstName", "lastName", "email"],
+  "additionalProperties": false
 }
